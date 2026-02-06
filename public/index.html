@@ -621,6 +621,13 @@
                 document.getElementById('loadingScreen').classList.add('hidden');
             }, 2000);
         });
+
+        const hash = window.location.hash;
+
+if (hash.includes("type=recovery")) {
+  window.location.href = "/public/reset-password.html";
+}
+
     </script>
 </body>
 </html>
