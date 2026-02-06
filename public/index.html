@@ -2,6 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
+    <script>
+  const hash = window.location.hash;
+  if (hash.includes("type=recovery")) {
+    window.location.href = "/reset-password.html";
+  }
+</script>
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexora - Elevate Your Digital Experience</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -621,12 +630,6 @@
                 document.getElementById('loadingScreen').classList.add('hidden');
             }, 2000);
         });
-
-        const hash = window.location.hash;
-
-if (hash.includes("type=recovery")) {
-  window.location.href = "/public/reset-password.html";
-}
 
     </script>
 </body>
