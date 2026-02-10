@@ -3,123 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexora — Dashboard</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    <title>Nexora Dashboard - Professional Analytics Platform</title>
     <style>
-        :root {
-            --midnight: #13151A;
-            --gold: #D4AF37;
-            --ivory: #FFFFF0;
-            --charcoal: #36454F;
-            --smoke: #F5F5F5;
-            --border: rgba(0,0,0,0.08);
-            --transition-fast: 0.18s ease-out;
-        }
-
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --accent-yellow: #f4c542;
+            --accent-yellow-hover: #e6b634;
+            --accent-yellow-light: #fef3d9;
+            --border-color: #e5e5e5;
+            --border-light: #f0f0f0;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
-            margin: 0;
-            font-family: 'Manrope', sans-serif;
-            background: var(--smoke);
-            color: var(--midnight);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* NAVBAR */
-        .nav {
-            position: fixed;
+        .navbar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
             top: 0;
-            width: 100%;
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
             z-index: 1000;
+            box-shadow: var(--shadow-sm);
         }
 
-        .nav-content {
-            max-width: 1400px;
+        .navbar-content {
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 1.4rem 3rem;
+            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 2rem;
+            height: 70px;
         }
 
-        .nav-left {
+        .navbar-left {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 3rem;
         }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            color: var(--midnight);
+            color: var(--text-primary);
             text-decoration: none;
+            cursor: pointer;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.2rem;
+            gap: 2rem;
             list-style: none;
-            padding: 0;
-            margin: 0;
         }
 
-        .nav-links a {
+        .nav-links li a {
+            color: var(--text-secondary);
             text-decoration: none;
-            color: var(--midnight);
-            font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.2s;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
         }
 
-        .nav-links a:hover {
-            color: var(--gold);
+        .nav-links li a:hover {
+            color: var(--text-primary);
         }
 
-        .nav-right {
+        .nav-links li a.active {
+            color: var(--text-primary);
+        }
+
+        .nav-links li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -23px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-yellow);
+        }
+
+        .navbar-right {
             display: flex;
             align-items: center;
-            gap: 1.2rem;
+            gap: 1.5rem;
         }
 
         .search-wrapper {
             position: relative;
-        }
-
-        .search-input {
-            padding: 0.6rem 0.9rem;
-            padding-left: 2.2rem;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: var(--smoke);
-            font-size: 0.9rem;
-            min-width: 200px;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-        }
-
-        .search-input:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(212,175,55,0.18);
-            background: #fff;
+            display: flex;
+            align-items: center;
         }
 
         .search-icon {
             position: absolute;
-            left: 0.8rem;
-            top: 50%;
-            transform: translateY(-50%);
+            left: 14px;
+            color: var(--text-tertiary);
+            font-size: 1.1rem;
+        }
+
+        .search-input {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 0.65rem 1rem 0.65rem 2.75rem;
+            color: var(--text-primary);
             font-size: 0.9rem;
-            color: var(--charcoal);
-            pointer-events: none;
+            width: 280px;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-yellow);
+            background: var(--bg-secondary);
+            box-shadow: 0 0 0 3px var(--accent-yellow-light);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-tertiary);
         }
 
         .profile-wrapper {
@@ -129,475 +155,1166 @@
         .profile-chip {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            padding: 0.4rem 0.9rem;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: white;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: 50px;
             cursor: pointer;
-            transition: box-shadow 0.2s, transform 0.1s;
+            transition: var(--transition);
         }
 
         .profile-chip:hover {
-            box-shadow: 0 4px 18px rgba(0,0,0,0.06);
-            transform: translateY(-1px);
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+            box-shadow: var(--shadow-sm);
         }
 
         .avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 999px;
-            background: var(--gold);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--accent-yellow);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
             font-size: 0.9rem;
-            color: var(--midnight);
+            color: var(--text-primary);
         }
 
         .profile-email {
-            font-size: 0.85rem;
-            color: var(--charcoal);
-            max-width: 160px;
-            white-space: nowrap;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            max-width: 150px;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .profile-dropdown {
             position: absolute;
+            top: calc(100% + 10px);
             right: 0;
-            top: 120%;
-            background: white;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            padding: 0.4rem 0;
-            min-width: 180px;
-            display: none;
-            z-index: 1200;
+            padding: 0.5rem;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
         }
 
-        .profile-dropdown.open {
-            display: block;
+        .profile-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
 
         .profile-dropdown-item {
-            padding: 0.7rem 1rem;
-            font-size: 0.9rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .profile-dropdown-item:hover {
-            background: var(--smoke);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
         }
 
         .profile-dropdown-item.danger {
-            color: #b00020;
+            color: #dc2626;
         }
 
-        /* LAYOUT */
-        .layout {
+        .profile-dropdown-item.danger:hover {
+            background: #fef2f2;
+        }
+
+        /* MAIN LAYOUT */
+        .main-layout {
             display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: calc(100vh - 70px);
         }
 
         /* SIDEBAR */
         .sidebar {
-            position: fixed;
-            top: 76px;
-            left: 0;
-            width: 240px;
-            height: calc(100vh - 76px);
-            background: white;
-            border-right: 1px solid var(--border);
-            padding: 1.6rem 1.4rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            transition: width var(--transition-fast);
+            width: 260px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 70px;
+            height: calc(100vh - 70px);
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
-        .sidebar.collapsed {
-            width: 72px;
+        .sidebar-section {
+            margin-bottom: 2rem;
         }
 
         .sidebar-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .sidebar-title {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--charcoal);
+            letter-spacing: 0.5px;
+            color: var(--text-tertiary);
         }
 
-        .sidebar-toggle {
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            font-size: 1rem;
-            color: var(--charcoal);
-        }
-
-        .sidebar-links {
+        .sidebar-menu {
             list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
         }
 
         .sidebar-item {
-            padding: 0.7rem 0.9rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.15s, color 0.15s, transform 0.08s;
-            color: var(--midnight);
-            font-size: 0.92rem;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            white-space: nowrap;
-        }
-
-        .sidebar-item-icon {
-            font-size: 1rem;
-            width: 18px;
-            text-align: center;
-        }
-
-        .sidebar-item-label {
-            transition: opacity 0.15s;
-        }
-
-        .sidebar.collapsed .sidebar-item-label {
-            opacity: 0;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            position: relative;
         }
 
         .sidebar-item:hover {
-            background: var(--smoke);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
         }
 
         .sidebar-item.active {
-            background: var(--gold);
-            color: white;
+            background: var(--accent-yellow);
+            color: var(--text-primary);
+            font-weight: 500;
         }
 
-        .sidebar-footer {
-            margin-top: auto;
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--text-primary);
         }
 
-        .sidebar-logout-btn {
-            width: 100%;
-            padding: 0.8rem;
-            border-radius: 10px;
-            background: var(--midnight);
-            color: white;
+        .sidebar-icon {
+            font-size: 1.1rem;
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-label {
+            flex: 1;
+        }
+
+        .logout-btn {
+            margin: 1.5rem;
+            padding: 0.75rem;
+            background: var(--text-primary);
+            color: var(--bg-secondary);
             border: none;
-            cursor: pointer;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: background 0.2s, transform 0.08s, box-shadow 0.15s;
+            cursor: pointer;
+            transition: var(--transition);
+            width: calc(100% - 3rem);
         }
 
-        .sidebar-logout-btn:hover {
-            background: var(--gold);
-            color: var(--midnight);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        .logout-btn:hover {
+            background: var(--text-secondary);
             transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
-        /* MAIN */
-        .main {
-            margin-left: 240px;
-            padding: 120px 3rem 3rem;
-            transition: margin-left var(--transition-fast);
+        /* SCROLLBAR */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
         }
 
-        .sidebar.collapsed ~ .main {
-            margin-left: 72px;
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
         }
 
-        .section {
+        .sidebar::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: var(--text-tertiary);
+        }
+
+        /* CONTENT AREA */
+        .content-area {
+            flex: 1;
+            padding: 2.5rem;
+            background: var(--bg-primary);
+            overflow-y: auto;
+        }
+
+        .page-section {
             display: none;
-            opacity: 0;
-            transform: translateY(6px);
-            transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+            animation: fadeIn 0.4s ease-out;
         }
 
-        .section.active {
+        .page-section.active {
             display: block;
-            opacity: 1;
-            transform: translateY(0);
         }
 
-        /* CARDS */
-        .card {
-            background: white;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* OVERVIEW PAGE */
+        .page-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .page-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.75rem;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .stat-info {
+            color: var(--text-tertiary);
+            font-size: 1rem;
+            cursor: help;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-change.positive {
+            color: #059669;
+        }
+
+        .stat-change.negative {
+            color: #dc2626;
+        }
+
+        /* SECTION CARDS */
+        .section-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 2rem;
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
             margin-bottom: 2rem;
-            transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
         }
 
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        .section-header {
+            margin-bottom: 1.5rem;
         }
 
-        .card h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin: 0 0 0.6rem 0;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
-        .card-subtitle {
-            color: var(--charcoal);
+        .section-subtitle {
+            color: var(--text-secondary);
             font-size: 0.95rem;
-            margin-bottom: 1.4rem;
         }
 
-        .metric-grid {
+        .signals-list {
+            list-style: none;
+        }
+
+        .signal-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .signal-item:last-child {
+            border-bottom: none;
+        }
+
+        .signal-item:hover {
+            background: var(--bg-tertiary);
+            margin: 0 -1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-radius: 8px;
+        }
+
+        .signal-label {
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .signal-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* PRICING PAGE */
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .toggle-wrapper {
+            display: inline-flex;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 0.4rem;
+        }
+
+        .toggle-option {
+            padding: 0.6rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+        }
+
+        .toggle-option.active {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .metric {
-            background: var(--smoke);
-            padding: 1rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
+        .pricing-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
         }
 
-        .metric-label-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.4rem;
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .metric-label {
-            font-size: 0.75rem;
+        .pricing-card.featured {
+            border-color: var(--accent-yellow);
+            background: var(--accent-yellow-light);
+        }
+
+        .pricing-card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-yellow);
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: var(--accent-yellow);
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
-            color: var(--charcoal);
-            margin-bottom: 0.3rem;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.5px;
         }
 
-        .metric-value {
-            font-size: 1.6rem;
+        .pricing-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 0.75rem;
             font-weight: 700;
         }
 
-        .metric-tooltip-icon {
-            font-size: 0.8rem;
-            color: var(--charcoal);
-            cursor: pointer;
-        }
-
-        .tooltip {
-            position: absolute;
-            right: 0.7rem;
-            top: 0.7rem;
-            background: #111;
-            color: #fff;
-            font-size: 0.75rem;
-            padding: 0.4rem 0.6rem;
-            border-radius: 6px;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-4px);
-            transition: opacity 0.15s, transform 0.15s;
-            max-width: 220px;
-        }
-
-        .metric:hover .tooltip {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* LISTS */
-        .list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .list-item {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .list-item:last-child {
-            border-bottom: none;
-        }
-
-        .list-label {
-            font-weight: 600;
-        }
-
-        .list-meta {
-            color: var(--charcoal);
-            font-size: 0.9rem;
-        }
-
-        /* ONBOARDING CHECKLIST */
-        .checklist {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.7rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .checklist-item:last-child {
-            border-bottom: none;
-        }
-
-        .checklist-left {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-
-        .checklist-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: var(--charcoal);
-        }
-
-        .checklist-label {
-            font-size: 0.9rem;
-        }
-
-        .checklist-status {
-            font-size: 0.8rem;
-            color: var(--charcoal);
-        }
-
-        .progress-bar {
-            margin-top: 1rem;
-            width: 100%;
-            height: 6px;
-            border-radius: 999px;
-            background: var(--smoke);
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            width: 0%;
-            height: 100%;
-            background: var(--gold);
-            transition: width 0.3s ease-out;
-        }
-
-        .progress-label {
-            margin-top: 0.4rem;
-            font-size: 0.85rem;
-            color: var(--charcoal);
-        }
-
-        /* EMPTY STATE ICONS */
-        .empty-state {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 0.8rem;
-        }
-
-        .empty-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
-            background: var(--smoke);
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--charcoal);
-        }
-
-        .empty-text {
-            color: var(--charcoal);
+        .pricing-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
             font-size: 0.95rem;
         }
 
+        .pricing-price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            letter-spacing: -2px;
+        }
+
+        .pricing-price span {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-features li {
+            padding: 1rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent-yellow);
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--text-primary);
+            color: var(--bg-secondary);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .pricing-btn:hover {
+            background: var(--text-secondary);
+            transform: scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        .pricing-btn.secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .pricing-btn.secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--text-primary);
+        }
+
+        /* BLOG PAGE */
+        .blog-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-yellow);
+            border-color: var(--accent-yellow);
+            color: var(--text-primary);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-yellow);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-yellow-hover) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.1) 100%);
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-category {
+            display: inline-block;
+            background: var(--accent-yellow-light);
+            color: var(--text-primary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .blog-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--accent-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .author-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .read-time {
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+        }
+
+        /* DOCS PAGE */
+        .docs-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr 220px;
+            gap: 3rem;
+        }
+
+        .docs-sidebar-left {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+        }
+
+        .docs-sidebar-right {
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+        }
+
+        .docs-toc-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-tertiary);
+            margin-bottom: 1rem;
+        }
+
+        .docs-nav {
+            list-style: none;
+        }
+
+        .docs-nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .docs-nav-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .docs-nav-link:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .docs-nav-link.active {
+            background: var(--accent-yellow-light);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .docs-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 900px;
+        }
+
+        .docs-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .docs-content h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .docs-content h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .docs-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .docs-content ul {
+            color: var(--text-secondary);
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .docs-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .docs-content code {
+            background: var(--accent-yellow-light);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: var(--text-primary);
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            background: var(--text-primary);
+            color: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-language {
+            font-size: 0.8rem;
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            padding: 0.4rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: var(--bg-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .code-block pre {
+            color: var(--bg-secondary);
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .note-box {
+            background: var(--accent-yellow-light);
+            border-left: 4px solid var(--accent-yellow);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .note-box h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .note-box p {
+            margin-bottom: 0;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .toc-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: block;
+            padding: 0.25rem 0;
+        }
+
+        .toc-link:hover {
+            color: var(--accent-yellow);
+        }
+
+        /* ABOUT PAGE */
+        .about-hero {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .about-hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .value-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-yellow);
+        }
+
+        .value-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .value-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .value-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .team-section {
+            margin: 5rem 0;
+        }
+
+        .section-header-centered {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header-centered h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-header-centered p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .team-member {
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: var(--accent-yellow);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .team-member:hover .team-avatar {
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.05);
+        }
+
+        .team-member h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .team-role {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .team-bio {
+            color: var(--text-tertiary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .stats-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+        }
+
+        .showcase-stat {
+            text-align: center;
+        }
+
+        .showcase-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--accent-yellow);
+        }
+
+        .showcase-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* ANALYTICS PAGE */
+        .analytics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .date-range-selector {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+
+        .date-btn {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .date-btn:hover,
+        .date-btn.active {
+            background: var(--accent-yellow);
+            color: var(--text-primary);
+        }
+
+        .chart-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+        }
+
         /* RESPONSIVE */
-        @media (max-width: 960px) {
-            .nav-content {
-                padding: 1.2rem 1.4rem;
+        @media (max-width: 1200px) {
+            .docs-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .docs-sidebar-left,
+            .docs-sidebar-right {
+                position: static;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-content {
+                padding: 0 1rem;
             }
 
             .nav-links {
                 display: none;
             }
 
+            .search-input {
+                width: 180px;
+            }
+
+            .main-layout {
+                flex-direction: column;
+            }
+
             .sidebar {
-                top: 70px;
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
             }
 
-            .main {
-                padding: 110px 1.4rem 2rem;
-            }
-        }
-
-        @media (max-width: 720px) {
-            .sidebar {
-                display: none;
+            .content-area {
+                padding: 1.5rem;
             }
 
-            .main {
-                margin-left: 0;
+            .page-title {
+                font-size: 1.75rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
-
 <body>
-
     <!-- NAVBAR -->
-    <nav class="nav">
-        <div class="nav-content">
-            <div class="nav-left">
-                <a href="index.html" class="logo">Nexora</a>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-left">
+                <a class="logo" data-page="overview">Nexora</a>
                 <ul class="nav-links">
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="docs.html">Docs</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a data-page="pricing">Pricing</a></li>
+                    <li><a data-page="blog">Blog</a></li>
+                    <li><a data-page="docs">Docs</a></li>
+                    <li><a data-page="about">About</a></li>
                 </ul>
             </div>
 
-            <div class="nav-right">
+            <div class="navbar-right">
                 <div class="search-wrapper">
                     <span class="search-icon">⌕</span>
                     <input class="search-input" type="text" placeholder="Search your workspace">
@@ -605,12 +1322,13 @@
 
                 <div class="profile-wrapper">
                     <div class="profile-chip" id="profileChip">
-                        <div class="avatar" id="avatar">N</div>
+                        <div class="avatar" id="avatar">A</div>
                         <div class="profile-email" id="profileEmail">loading...</div>
                     </div>
                     <div class="profile-dropdown" id="profileDropdown">
-                        <div class="profile-dropdown-item" data-dropdown-action="profile">Profile</div>
-                        <div class="profile-dropdown-item" data-dropdown-action="settings">Settings</div>
+                        <div class="profile-dropdown-item" data-dropdown-action="profile">Profile Settings</div>
+                        <div class="profile-dropdown-item" data-dropdown-action="billing">Billing</div>
+                        <div class="profile-dropdown-item" data-dropdown-action="settings">Preferences</div>
                         <div class="profile-dropdown-item danger" data-dropdown-action="logout">Log out</div>
                     </div>
                 </div>
@@ -618,1520 +1336,1103 @@
         </div>
     </nav>
 
-    <div class="layout">
+    <!-- MAIN LAYOUT -->
+    <div class="main-layout">
         <!-- SIDEBAR -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-title">Workspace</div>
-                <button class="sidebar-toggle" id="sidebarToggle" title="Collapse sidebar">⟨⟩</button>
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-header">
+                    <span class="sidebar-title">Workspace</span>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="sidebar-item active" data-sidebar-page="overview">
+                        <span class="sidebar-icon">📊</span>
+                        <span class="sidebar-label">Overview</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="reputation">
+                        <span class="sidebar-icon">⭐</span>
+                        <span class="sidebar-label">Reputation</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="activity">
+                        <span class="sidebar-icon">≡</span>
+                        <span class="sidebar-label">Activity</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="integrations">
+                        <span class="sidebar-icon">—</span>
+                        <span class="sidebar-label">Integrations</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="analytics">
+                        <span class="sidebar-icon">📈</span>
+                        <span class="sidebar-label">Analytics</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="insights">
+                        <span class="sidebar-icon">💡</span>
+                        <span class="sidebar-label">Insights</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="network">
+                        <span class="sidebar-icon">🌐</span>
+                        <span class="sidebar-label">Network</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="achievements">
+                        <span class="sidebar-icon">🏆</span>
+                        <span class="sidebar-label">Achievements</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="skills">
+                        <span class="sidebar-icon">🎯</span>
+                        <span class="sidebar-label">Skills</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="projects">
+                        <span class="sidebar-icon">📁</span>
+                        <span class="sidebar-label">Projects</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="contributions">
+                        <span class="sidebar-icon">✨</span>
+                        <span class="sidebar-label">Contributions</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="timeline">
+                        <span class="sidebar-icon">📅</span>
+                        <span class="sidebar-label">Timeline</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="portfolio">
+                        <span class="sidebar-icon">📸</span>
+                        <span class="sidebar-label">Portfolio</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="endorsements">
+                        <span class="sidebar-icon">👥</span>
+                        <span class="sidebar-label">Endorsements</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="api">
+                        <span class="sidebar-icon">🔌</span>
+                        <span class="sidebar-label">API & Access</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="settings">
+                        <span class="sidebar-icon">⚙</span>
+                        <span class="sidebar-label">Settings</span>
+                    </li>
+                    <li class="sidebar-item" data-sidebar-page="info">
+                        <span class="sidebar-icon">?</span>
+                        <span class="sidebar-label">Info</span>
+                    </li>
+                </ul>
             </div>
-            <ul class="sidebar-links">
-                <li class="sidebar-item active" data-tab="overview">
-                    <span class="sidebar-item-icon">⌂</span>
-                    <span class="sidebar-item-label">Overview</span>
-                </li>
-                <li class="sidebar-item" data-tab="reputation">
-                    <span class="sidebar-item-icon">★</span>
-                    <span class="sidebar-item-label">Reputation</span>
-                </li>
-                <li class="sidebar-item" data-tab="activity">
-                    <span class="sidebar-item-icon">☰</span>
-                    <span class="sidebar-item-label">Activity</span>
-                </li>
-                <li class="sidebar-item" data-tab="integrations">
-                    <span class="sidebar-item-icon">⤳</span>
-                    <span class="sidebar-item-label">Integrations</span>
-                </li>
-                <li class="sidebar-item" data-tab="analytics">
-                    <span class="sidebar-item-icon">📊</span>
-                    <span class="sidebar-item-label">Analytics</span>
-                </li>
-                <li class="sidebar-item" data-tab="insights">
-                    <span class="sidebar-item-icon">💡</span>
-                    <span class="sidebar-item-label">Insights</span>
-                </li>
-                <li class="sidebar-item" data-tab="network">
-                    <span class="sidebar-item-icon">🌐</span>
-                    <span class="sidebar-item-label">Network</span>
-                </li>
-                <li class="sidebar-item" data-tab="achievements">
-                    <span class="sidebar-item-icon">🏆</span>
-                    <span class="sidebar-item-label">Achievements</span>
-                </li>
-                <li class="sidebar-item" data-tab="skills">
-                    <span class="sidebar-item-icon">🎯</span>
-                    <span class="sidebar-item-label">Skills</span>
-                </li>
-                <li class="sidebar-item" data-tab="projects">
-                    <span class="sidebar-item-icon">📁</span>
-                    <span class="sidebar-item-label">Projects</span>
-                </li>
-                <li class="sidebar-item" data-tab="contributions">
-                    <span class="sidebar-item-icon">✨</span>
-                    <span class="sidebar-item-label">Contributions</span>
-                </li>
-                <li class="sidebar-item" data-tab="timeline">
-                    <span class="sidebar-item-icon">📅</span>
-                    <span class="sidebar-item-label">Timeline</span>
-                </li>
-                <li class="sidebar-item" data-tab="portfolio">
-                    <span class="sidebar-item-icon">💼</span>
-                    <span class="sidebar-item-label">Portfolio</span>
-                </li>
-                <li class="sidebar-item" data-tab="endorsements">
-                    <span class="sidebar-item-icon">👥</span>
-                    <span class="sidebar-item-label">Endorsements</span>
-                </li>
-                <li class="sidebar-item" data-tab="api">
-                    <span class="sidebar-item-icon">⌘</span>
-                    <span class="sidebar-item-label">API & Access</span>
-                </li>
-                <li class="sidebar-item" data-tab="settings">
-                    <span class="sidebar-item-icon">⚙</span>
-                    <span class="sidebar-item-label">Settings</span>
-                </li>
-                <li class="sidebar-item" data-tab="info">
-                    <span class="sidebar-item-icon">?</span>
-                    <span class="sidebar-item-label">Info</span>
-                </li>
-            </ul>
 
-            <div class="sidebar-footer">
-                <button class="sidebar-logout-btn" onclick="logout()">Log out</button>
-            </div>
+            <button class="logout-btn">Log out</button>
         </aside>
 
-        <!-- MAIN -->
-        <main class="main">
+        <!-- CONTENT AREA -->
+        <main class="content-area">
+            <!-- OVERVIEW PAGE -->
+            <section class="page-section active" id="overview">
+                <div class="page-header">
+                    <h1 class="page-title">Identity Snapshot</h1>
+                    <p class="page-description">Your unified identity and reputation starting from zero.</p>
+                </div>
 
-            <!-- OVERVIEW -->
-            <section class="section active" id="overview">
-                <div class="card">
-                    <h2>Identity Snapshot</h2>
-                    <p class="card-subtitle">Your unified identity and reputation starting from zero.</p>
-                    <div class="metric-grid">
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Nexora Score</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Your overall reputation score across all connected signals. Everyone starts at 0.</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Nexora Score</span>
+                            <span class="stat-info">ⓘ</span>
                         </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Trust Tier</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">A tiered view of how reliable your identity appears to platforms.</div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-change">Building your foundation</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Trust Tier</span>
+                            <span class="stat-info">ⓘ</span>
                         </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Credibility Index</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Measures the consistency and authenticity of your digital presence.</div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-change">Complete verifications to level up</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Credibility Index</span>
+                            <span class="stat-info">ⓘ</span>
                         </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Influence Score</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Your reach and impact across connected platforms and communities.</div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-change">Earn through contributions</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Influence Score</span>
+                            <span class="stat-info">ⓘ</span>
                         </div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-change">Grow your network</div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <h2>Quick Signals</h2>
-                    <p class="card-subtitle">High-level signals that will grow as you connect more platforms.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">Professional footprint</span>
-                            <span class="list-meta">0</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Technical activity</span>
-                            <span class="list-meta">0</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Community presence</span>
-                            <span class="list-meta">0</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Content creation</span>
-                            <span class="list-meta">0</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Collaboration index</span>
-                            <span class="list-meta">0</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Open source contributions</span>
-                            <span class="list-meta">0</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Knowledge sharing</span>
-                            <span class="list-meta">0</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Network strength</span>
-                            <span class="list-meta">0</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h2>Onboarding Checklist</h2>
-                    <p class="card-subtitle">Start here. As you complete these steps, your Nexora Score will begin to move.</p>
-                    <ul class="checklist">
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Connect GitHub</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Connect LinkedIn</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Connect Discord</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Connect Twitter/X</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Connect Stack Overflow</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Connect Medium</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Complete profile details</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Verify email address</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Add professional bio</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                        <li class="checklist-item">
-                            <div class="checklist-left">
-                                <div class="checklist-icon">•</div>
-                                <div class="checklist-label">Upload profile picture</div>
-                            </div>
-                            <div class="checklist-status">0% complete</div>
-                        </li>
-                    </ul>
-                    <div class="progress-bar">
-                        <div class="progress-fill" id="onboardingProgress"></div>
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2 class="section-title">Quick Signals</h2>
+                        <p class="section-subtitle">High-level signals that will grow as you connect more platforms.</p>
                     </div>
-                    <div class="progress-label" id="onboardingLabel">0% of your onboarding is complete.</div>
-                </div>
 
-                <div class="card">
-                    <h2>Recent Highlights</h2>
-                    <p class="card-subtitle">Your most impactful activities will appear here once you start connecting platforms.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">✨</div>
-                        <div class="empty-text">
-                            No highlights yet. Your achievements, top contributions, and milestones will show here.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- REPUTATION -->
-            <section class="section" id="reputation">
-                <div class="card">
-                    <h2>Reputation Breakdown</h2>
-                    <p class="card-subtitle">Each dimension starts at zero and grows as you build your footprint.</p>
-                    <div class="metric-grid">
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Professional</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Signals from work history, roles, endorsements, and professional networks.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Technical</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Signals from code contributions, repositories, and technical activity.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Community</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Signals from communities you participate in and contribute to.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Reliability</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Signals about consistency, follow-through, and long-term behavior.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Expertise</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Depth of knowledge demonstrated across specialized domains.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Leadership</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Initiative shown in projects, teams, and community building.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Innovation</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Original contributions, creative solutions, and novel approaches.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Mentorship</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Impact through teaching, guiding, and supporting others.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Score History</h2>
-                    <p class="card-subtitle">Track how your reputation has evolved over time.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📈</div>
-                        <div class="empty-text">
-                            No historical data yet. Your score progression will be visualized here.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Reputation Milestones</h2>
-                    <p class="card-subtitle">Key achievements that boosted your overall score.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🎖️</div>
-                        <div class="empty-text">
-                            No milestones yet. Major achievements and breakthroughs will appear here.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Peer Comparison</h2>
-                    <p class="card-subtitle">See how your reputation compares to similar profiles.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">👥</div>
-                        <div class="empty-text">
-                            Insufficient data for comparison. Connect more platforms to unlock insights.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ACTIVITY -->
-            <section class="section" id="activity">
-                <div class="card">
-                    <h2>Recent Activity</h2>
-                    <p class="card-subtitle">As you connect integrations and use Nexora, your cross-platform activity will appear here.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">⌀</div>
-                        <div class="empty-text">
-                            No activity yet. Once you connect GitHub, LinkedIn, or Discord, this feed will begin to populate.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Activity Heatmap</h2>
-                    <p class="card-subtitle">Visualize your activity patterns across platforms and time periods.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🗓️</div>
-                        <div class="empty-text">
-                            No activity data to visualize. Connect platforms to see your patterns.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Activity Breakdown</h2>
-                    <p class="card-subtitle">Detailed view of your actions across different categories.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">Code commits</span>
-                            <span class="list-meta">0</span>
+                    <ul class="signals-list">
+                        <li class="signal-item">
+                            <span class="signal-label">Professional footprint</span>
+                            <span class="signal-value">0</span>
                         </li>
-                        <li class="list-item">
-                            <span class="list-label">Pull requests</span>
-                            <span class="list-meta">0</span>
+                        <li class="signal-item">
+                            <span class="signal-label">Technical activity</span>
+                            <span class="signal-value">0</span>
                         </li>
-                        <li class="list-item">
-                            <span class="list-label">Issues opened</span>
-                            <span class="list-meta">0</span>
+                        <li class="signal-item">
+                            <span class="signal-label">Community presence</span>
+                            <span class="signal-value">0</span>
                         </li>
-                        <li class="list-item">
-                            <span class="list-label">Community posts</span>
-                            <span class="list-meta">0</span>
+                        <li class="signal-item">
+                            <span class="signal-label">Content creation</span>
+                            <span class="signal-value">0</span>
                         </li>
-                        <li class="list-item">
-                            <span class="list-label">Articles published</span>
-                            <span class="list-meta">0</span>
+                        <li class="signal-item">
+                            <span class="signal-label">Collaboration index</span>
+                            <span class="signal-value">0</span>
                         </li>
-                        <li class="list-item">
-                            <span class="list-label">Comments made</span>
-                            <span class="list-meta">0</span>
+                        <li class="signal-item">
+                            <span class="signal-label">Open source contributions</span>
+                            <span class="signal-value">0</span>
                         </li>
-                        <li class="list-item">
-                            <span class="list-label">Projects created</span>
-                            <span class="list-meta">0</span>
+                        <li class="signal-item">
+                            <span class="signal-label">Knowledge sharing</span>
+                            <span class="signal-value">0</span>
                         </li>
-                        <li class="list-item">
-                            <span class="list-label">Collaborations</span>
-                            <span class="list-meta">0</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h2>Most Active Platforms</h2>
-                    <p class="card-subtitle">Where you spend most of your time and effort.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📱</div>
-                        <div class="empty-text">
-                            No platform data available. Connect integrations to see your activity distribution.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- INTEGRATIONS -->
-            <section class="section" id="integrations">
-                <div class="card">
-                    <h2>Integrations</h2>
-                    <p class="card-subtitle">Connect platforms to enrich your Nexora identity. All integrations start disconnected.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">GitHub</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">LinkedIn</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Discord</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Twitter/X</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Stack Overflow</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Medium</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Dev.to</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Hashnode</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Reddit</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Hacker News</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Product Hunt</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Dribbble</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Behance</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Figma</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Codepen</span>
-                            <span class="list-meta">Not connected</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h2>Integration Health</h2>
-                    <p class="card-subtitle">Monitor the status and sync health of your connected platforms.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🔌</div>
-                        <div class="empty-text">
-                            No integrations to monitor. Connect platforms to see their health status.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Data Sync Status</h2>
-                    <p class="card-subtitle">Track when your data was last synced from each platform.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🔄</div>
-                        <div class="empty-text">
-                            No sync history available. Connected platforms will show last sync times here.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ANALYTICS -->
-            <section class="section" id="analytics">
-                <div class="card">
-                    <h2>Analytics Dashboard</h2>
-                    <p class="card-subtitle">Deep insights into your digital presence and growth patterns.</p>
-                    <div class="metric-grid">
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Total Reach</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Estimated number of people who have seen your content or contributions.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Engagement Rate</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0%</div>
-                            <div class="tooltip">How actively people interact with your content and contributions.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Growth Rate</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0%</div>
-                            <div class="tooltip">Month-over-month growth in your overall Nexora Score.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Impact Score</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Measures the tangible impact of your contributions and work.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Audience Demographics</h2>
-                    <p class="card-subtitle">Understand who engages with your content and contributions.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">👥</div>
-                        <div class="empty-text">
-                            No audience data available. Build your presence to unlock demographic insights.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Performance Trends</h2>
-                    <p class="card-subtitle">Track key metrics over time to identify patterns and opportunities.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📊</div>
-                        <div class="empty-text">
-                            Insufficient data for trend analysis. Continue building your profile.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Content Performance</h2>
-                    <p class="card-subtitle">See which of your contributions and content perform best.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">⭐</div>
-                        <div class="empty-text">
-                            No content to analyze. Create and share to see performance metrics.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- INSIGHTS -->
-            <section class="section" id="insights">
-                <div class="card">
-                    <h2>AI-Powered Insights</h2>
-                    <p class="card-subtitle">Personalized recommendations to enhance your digital presence.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🤖</div>
-                        <div class="empty-text">
-                            Not enough data for insights. Connect platforms and build activity to unlock AI recommendations.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Growth Opportunities</h2>
-                    <p class="card-subtitle">Areas where you can expand your influence and expertise.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🎯</div>
-                        <div class="empty-text">
-                            No opportunities identified yet. Build your profile to discover growth paths.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Skill Gap Analysis</h2>
-                    <p class="card-subtitle">Identify areas for development based on your goals and peers.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📚</div>
-                        <div class="empty-text">
-                            Insufficient data for analysis. Complete your profile and connect platforms.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Strategic Recommendations</h2>
-                    <p class="card-subtitle">Data-driven suggestions for maximizing your impact.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">💡</div>
-                        <div class="empty-text">
-                            No recommendations available. More activity data needed for strategic insights.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- NETWORK -->
-            <section class="section" id="network">
-                <div class="card">
-                    <h2>Network Overview</h2>
-                    <p class="card-subtitle">Your professional and social connections across platforms.</p>
-                    <div class="metric-grid">
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Total Connections</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Combined connections across all linked platforms.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Network Reach</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Estimated total reach through your network connections.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Collaborators</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">People you've actively worked with on projects.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Network Score</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Quality and strength of your professional network.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Key Connections</h2>
-                    <p class="card-subtitle">Your most influential and active connections.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🌟</div>
-                        <div class="empty-text">
-                            No connections analyzed yet. Connect platforms to see your key relationships.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Network Map</h2>
-                    <p class="card-subtitle">Visual representation of your connection clusters and communities.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🗺️</div>
-                        <div class="empty-text">
-                            Network visualization requires connection data. Link platforms to unlock.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Connection Growth</h2>
-                    <p class="card-subtitle">Track how your network has expanded over time.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📈</div>
-                        <div class="empty-text">
-                            No historical network data. Growth tracking will appear as you build connections.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ACHIEVEMENTS -->
-            <section class="section" id="achievements">
-                <div class="card">
-                    <h2>Achievements & Badges</h2>
-                    <p class="card-subtitle">Milestones and recognition earned across your journey.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🏆</div>
-                        <div class="empty-text">
-                            No achievements unlocked yet. Complete actions to earn badges and recognition.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Unlock Progress</h2>
-                    <p class="card-subtitle">See which achievements you're close to unlocking.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">First Contribution</span>
-                            <span class="list-meta">0/1</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Profile Complete</span>
-                            <span class="list-meta">0/10</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Network Builder</span>
-                            <span class="list-meta">0/50</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Code Warrior</span>
-                            <span class="list-meta">0/100</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Community Leader</span>
-                            <span class="list-meta">0/25</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h2>Leaderboards</h2>
-                    <p class="card-subtitle">See how you rank against others in various categories.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📊</div>
-                        <div class="empty-text">
-                            Leaderboard rankings require active participation. Start building to compete.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SKILLS -->
-            <section class="section" id="skills">
-                <div class="card">
-                    <h2>Skills Profile</h2>
-                    <p class="card-subtitle">Skills detected and verified from your connected platforms.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🎯</div>
-                        <div class="empty-text">
-                            No skills detected yet. Connect platforms to automatically identify your expertise.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Skill Endorsements</h2>
-                    <p class="card-subtitle">Recognition from your network validating your expertise.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">✓</div>
-                        <div class="empty-text">
-                            No endorsements received. Build your network to receive skill validations.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Skill Trends</h2>
-                    <p class="card-subtitle">Track how your skill proficiency evolves over time.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📈</div>
-                        <div class="empty-text">
-                            Insufficient data for skill trend analysis. Continue contributing to track growth.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Recommended Learning</h2>
-                    <p class="card-subtitle">Personalized suggestions for expanding your skill set.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📚</div>
-                        <div class="empty-text">
-                            Learning recommendations available after skills are identified.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PROJECTS -->
-            <section class="section" id="projects">
-                <div class="card">
-                    <h2>Projects Portfolio</h2>
-                    <p class="card-subtitle">Showcase of your work, contributions, and creations.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📁</div>
-                        <div class="empty-text">
-                            No projects detected. Connect GitHub and other platforms to display your work.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Active Projects</h2>
-                    <p class="card-subtitle">Projects you're currently working on across platforms.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">⚡</div>
-                        <div class="empty-text">
-                            No active projects tracked. Link platforms to see ongoing work.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Project Impact</h2>
-                    <p class="card-subtitle">Metrics showing the reach and influence of your projects.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">💫</div>
-                        <div class="empty-text">
-                            Project analytics available after connecting platforms and repositories.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Collaborative Projects</h2>
-                    <p class="card-subtitle">Work done in collaboration with others.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🤝</div>
-                        <div class="empty-text">
-                            No collaborative projects identified. Connect platforms to show teamwork.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CONTRIBUTIONS -->
-            <section class="section" id="contributions">
-                <div class="card">
-                    <h2>Contribution Overview</h2>
-                    <p class="card-subtitle">Your impact across open source, communities, and platforms.</p>
-                    <div class="metric-grid">
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Total Contributions</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Combined contributions across all connected platforms.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Repositories</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Number of repositories you've contributed to.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Pull Requests</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Total pull requests submitted across platforms.</div>
-                        </div>
-                        <div class="metric">
-                            <div class="metric-label-row">
-                                <div class="metric-label">Issues Resolved</div>
-                                <div class="metric-tooltip-icon">i</div>
-                            </div>
-                            <div class="metric-value">0</div>
-                            <div class="tooltip">Issues you've successfully helped resolve.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Top Contributions</h2>
-                    <p class="card-subtitle">Your most impactful contributions ranked by various metrics.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">⭐</div>
-                        <div class="empty-text">
-                            No contributions to rank yet. Start contributing to see your impact.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Contribution Streaks</h2>
-                    <p class="card-subtitle">Track your consistency and commitment over time.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🔥</div>
-                        <div class="empty-text">
-                            No streaks to display. Regular contributions will build streaks here.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Community Impact</h2>
-                    <p class="card-subtitle">How your contributions have helped communities and projects.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🌍</div>
-                        <div class="empty-text">
-                            Community impact metrics available after establishing contribution history.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- TIMELINE -->
-            <section class="section" id="timeline">
-                <div class="card">
-                    <h2>Activity Timeline</h2>
-                    <p class="card-subtitle">Chronological view of your entire digital journey.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">⏱️</div>
-                        <div class="empty-text">
-                            No timeline events yet. Your activities will appear in chronological order here.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Career Milestones</h2>
-                    <p class="card-subtitle">Key moments in your professional journey.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🎯</div>
-                        <div class="empty-text">
-                            Add career information to display milestones and achievements.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Year in Review</h2>
-                    <p class="card-subtitle">Annual summary of your accomplishments and growth.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📅</div>
-                        <div class="empty-text">
-                            Year in review available after accumulating one year of activity.
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- PORTFOLIO -->
-            <section class="section" id="portfolio">
-                <div class="card">
-                    <h2>Public Portfolio</h2>
-                    <p class="card-subtitle">Your professional showcase visible to the world.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">💼</div>
-                        <div class="empty-text">
-                            Portfolio empty. Add projects, achievements, and work samples to build your showcase.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Featured Work</h2>
-                    <p class="card-subtitle">Highlight your best projects and contributions.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">⭐</div>
-                        <div class="empty-text">
-                            No featured work selected. Choose projects to showcase your expertise.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Portfolio Analytics</h2>
-                    <p class="card-subtitle">Track views, engagement, and reach of your portfolio.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📊</div>
-                        <div class="empty-text">
-                            Analytics available after your portfolio receives traffic.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Portfolio Settings</h2>
-                    <p class="card-subtitle">Customize how your work is presented to others.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">Privacy Level</span>
-                            <span class="list-meta">Public</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Theme</span>
-                            <span class="list-meta">Default</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Custom Domain</span>
-                            <span class="list-meta">Not configured</span>
+                        <li class="signal-item">
+                            <span class="signal-label">Network strength</span>
+                            <span class="signal-value">0</span>
                         </li>
                     </ul>
                 </div>
             </section>
 
-            <!-- ENDORSEMENTS -->
-            <section class="section" id="endorsements">
-                <div class="card">
-                    <h2>Endorsements Received</h2>
-                    <p class="card-subtitle">Recognition and validation from your network.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">👏</div>
-                        <div class="empty-text">
-                            No endorsements received yet. Build your network and expertise to receive recognition.
-                        </div>
+            <!-- PRICING PAGE -->
+            <section class="page-section" id="pricing">
+                <div class="page-header">
+                    <h1 class="page-title">Simple, Transparent Pricing</h1>
+                    <p class="page-description">Choose the perfect plan for your needs. All plans include core features.</p>
+                </div>
+
+                <div class="pricing-toggle">
+                    <div class="toggle-wrapper">
+                        <button class="toggle-option active">Monthly</button>
+                        <button class="toggle-option">Yearly (Save 20%)</button>
                     </div>
                 </div>
 
-                <div class="card">
-                    <h2>Endorsements Given</h2>
-                    <p class="card-subtitle">Your contributions to validating others' skills and work.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🤝</div>
-                        <div class="empty-text">
-                            You haven't endorsed anyone yet. Support your network by endorsing their skills.
-                        </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Starter</h3>
+                        <p class="pricing-description">Perfect for individuals getting started with identity management</p>
+                        <div class="pricing-price">$0<span>/month</span></div>
+                        <ul class="pricing-features">
+                            <li>Up to 5 platform integrations</li>
+                            <li>Basic identity snapshot</li>
+                            <li>1 GB storage for credentials</li>
+                            <li>Weekly reputation updates</li>
+                            <li>Community support access</li>
+                            <li>Email notifications</li>
+                            <li>Mobile app access</li>
+                        </ul>
+                        <button class="pricing-btn secondary">Get Started Free</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">Most Popular</div>
+                        <h3>Professional</h3>
+                        <p class="pricing-description">For professionals building a comprehensive digital identity</p>
+                        <div class="pricing-price">$29<span>/month</span></div>
+                        <ul class="pricing-features">
+                            <li>Unlimited platform integrations</li>
+                            <li>Advanced analytics dashboard</li>
+                            <li>50 GB credential storage</li>
+                            <li>Real-time reputation tracking</li>
+                            <li>Priority email support</li>
+                            <li>Custom domain support</li>
+                            <li>API access (10k calls/month)</li>
+                            <li>Team collaboration tools</li>
+                            <li>Advanced security features</li>
+                            <li>Quarterly strategy reviews</li>
+                        </ul>
+                        <button class="pricing-btn">Start 14-Day Free Trial</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <h3>Enterprise</h3>
+                        <p class="pricing-description">Custom solutions for organizations and large teams</p>
+                        <div class="pricing-price">$99<span>/month</span></div>
+                        <ul class="pricing-features">
+                            <li>Everything in Professional</li>
+                            <li>Unlimited storage</li>
+                            <li>Dedicated account manager</li>
+                            <li>24/7 phone & chat support</li>
+                            <li>Custom SLA agreements</li>
+                            <li>Advanced security & compliance</li>
+                            <li>SSO & SAML integration</li>
+                            <li>White-label options</li>
+                            <li>Custom API limits</li>
+                            <li>On-premise deployment option</li>
+                            <li>Training & onboarding</li>
+                        </ul>
+                        <button class="pricing-btn">Contact Sales</button>
                     </div>
                 </div>
 
-                <div class="card">
-                    <h2>Testimonials</h2>
-                    <p class="card-subtitle">Written recommendations and feedback from colleagues.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">💬</div>
-                        <div class="empty-text">
-                            No testimonials yet. Request recommendations from people you've worked with.
+                <div class="section-card" style="margin-top: 3rem; text-align: center;">
+                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem;">All plans include</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔒</div>
+                            <h4 style="margin-bottom: 0.5rem;">Bank-level Security</h4>
+                            <p style="color: var(--text-secondary);">256-bit encryption for all data</p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h2>Endorsement Trends</h2>
-                    <p class="card-subtitle">Track how your endorsements grow over time.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📈</div>
-                        <div class="empty-text">
-                            Trend data available after receiving endorsements.
+                        <div>
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📱</div>
+                            <h4 style="margin-bottom: 0.5rem;">Mobile Apps</h4>
+                            <p style="color: var(--text-secondary);">iOS & Android native apps</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🌍</div>
+                            <h4 style="margin-bottom: 0.5rem;">Global CDN</h4>
+                            <p style="color: var(--text-secondary);">Lightning fast worldwide</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔄</div>
+                            <h4 style="margin-bottom: 0.5rem;">99.9% Uptime</h4>
+                            <p style="color: var(--text-secondary);">Guaranteed reliability</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- API -->
-            <section class="section" id="api">
-                <div class="card">
-                    <h2>API & Access</h2>
-                    <p class="card-subtitle">Use Nexora inside your own products. Your API key starts as not generated.</p>
-                    <div class="metric">
-                        <div class="metric-label">API Key</div>
-                        <div class="metric-value" style="font-size:1rem;">Not generated</div>
+            <!-- BLOG PAGE -->
+            <section class="page-section" id="blog">
+                <div class="page-header">
+                    <h1 class="page-title">Latest from the Blog</h1>
+                    <p class="page-description">Insights, updates, and stories from the Nexora team and community</p>
+                </div>
+
+                <div class="blog-filters">
+                    <button class="filter-btn active">All Posts</button>
+                    <button class="filter-btn">Product Updates</button>
+                    <button class="filter-btn">Engineering</button>
+                    <button class="filter-btn">Design</button>
+                    <button class="filter-btn">Company News</button>
+                    <button class="filter-btn">Tutorials</button>
+                </div>
+
+                <div class="blog-grid">
+                    <div class="blog-card">
+                        <div class="blog-image">📊</div>
+                        <div class="blog-content">
+                            <span class="blog-category">Analytics</span>
+                            <div class="blog-meta">
+                                <span>February 8, 2026</span>
+                                <span>•</span>
+                                <span>Sarah Chen</span>
+                            </div>
+                            <h3>The Future of Identity Analytics</h3>
+                            <p>Discover how AI-powered analytics are transforming the way professionals build and manage their digital identity across multiple platforms.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <div class="author-avatar">SC</div>
+                                    <span class="author-name">Sarah Chen</span>
+                                </div>
+                                <span class="read-time">8 min read</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="empty-state" style="margin-top:1.2rem;">
-                        <div class="empty-icon">⌘</div>
-                        <div class="empty-text">
-                            When you're ready, this section will show your generated keys, scopes, and usage.
+
+                    <div class="blog-card">
+                        <div class="blog-image">🚀</div>
+                        <div class="blog-content">
+                            <span class="blog-category">Product Updates</span>
+                            <div class="blog-meta">
+                                <span>February 5, 2026</span>
+                                <span>•</span>
+                                <span>Marcus Rodriguez</span>
+                            </div>
+                            <h3>Announcing Nexora 3.0</h3>
+                            <p>We're thrilled to introduce the most significant update to Nexora yet, featuring real-time collaboration, enhanced security, and 50+ new integrations.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <div class="author-avatar">MR</div>
+                                    <span class="author-name">Marcus Rodriguez</span>
+                                </div>
+                                <span class="read-time">12 min read</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">🔒</div>
+                        <div class="blog-content">
+                            <span class="blog-category">Security</span>
+                            <div class="blog-meta">
+                                <span>February 2, 2026</span>
+                                <span>•</span>
+                                <span>Alex Johnson</span>
+                            </div>
+                            <h3>Security Best Practices for 2026</h3>
+                            <p>A comprehensive guide to securing your digital identity with zero-trust architecture, biometric authentication, and advanced encryption.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <div class="author-avatar">AJ</div>
+                                    <span class="author-name">Alex Johnson</span>
+                                </div>
+                                <span class="read-time">10 min read</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">💡</div>
+                        <div class="blog-content">
+                            <span class="blog-category">Tutorials</span>
+                            <div class="blog-meta">
+                                <span>January 30, 2026</span>
+                                <span>•</span>
+                                <span>Emma Park</span>
+                            </div>
+                            <h3>Building Your Professional Brand</h3>
+                            <p>Learn strategic approaches to building a cohesive professional identity that stands out in today's competitive digital landscape.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <div class="author-avatar">EP</div>
+                                    <span class="author-name">Emma Park</span>
+                                </div>
+                                <span class="read-time">6 min read</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">🎨</div>
+                        <div class="blog-content">
+                            <span class="blog-category">Design</span>
+                            <div class="blog-meta">
+                                <span>January 26, 2026</span>
+                                <span>•</span>
+                                <span>Emma Park</span>
+                            </div>
+                            <h3>Redesigning the Dashboard Experience</h3>
+                            <p>Behind the scenes of our complete dashboard redesign: research, iterations, user testing, and the design decisions that shaped our new interface.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <div class="author-avatar">EP</div>
+                                    <span class="author-name">Emma Park</span>
+                                </div>
+                                <span class="read-time">15 min read</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">🌍</div>
+                        <div class="blog-content">
+                            <span class="blog-category">Company News</span>
+                            <div class="blog-meta">
+                                <span>January 22, 2026</span>
+                                <span>•</span>
+                                <span>Alex Johnson</span>
+                            </div>
+                            <h3>Expanding to 100+ Countries</h3>
+                            <p>Our journey to becoming a truly global platform with localized experiences, regional data centers, and partnerships around the world.</p>
+                            <div class="blog-footer">
+                                <div class="blog-author">
+                                    <div class="author-avatar">AJ</div>
+                                    <span class="author-name">Alex Johnson</span>
+                                </div>
+                                <span class="read-time">7 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DOCS PAGE -->
+            <section class="page-section" id="docs">
+                <div class="docs-layout">
+                    <aside class="docs-sidebar-left">
+                        <h3 class="docs-toc-title">Documentation</h3>
+                        <ul class="docs-nav">
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link active">Getting Started</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">Quick Start Guide</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">Authentication</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">API Reference</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">Integrations</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">Webhooks</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">SDKs & Libraries</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">Security</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">Best Practices</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">Troubleshooting</div>
+                            </li>
+                            <li class="docs-nav-item">
+                                <div class="docs-nav-link">FAQ</div>
+                            </li>
+                        </ul>
+                    </aside>
+
+                    <div class="docs-content">
+                        <h1>Getting Started with Nexora</h1>
+                        <p>Welcome to the Nexora documentation. This comprehensive guide will help you integrate Nexora into your workflow and start building your unified digital identity in minutes.</p>
+
+                        <h2>Introduction</h2>
+                        <p>Nexora is a powerful platform that aggregates your professional identity across multiple platforms, providing unified analytics, reputation scoring, and collaboration tools. Whether you're a freelancer, developer, designer, or enterprise team, Nexora helps you understand and optimize your digital presence.</p>
+
+                        <h2>Quick Start</h2>
+                        <p>Follow these steps to get up and running with Nexora:</p>
+
+                        <h3>1. Installation</h3>
+                        <p>Install the Nexora SDK using your preferred package manager:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">BASH</span>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <pre># Using npm
+npm install @nexora/sdk
+
+# Using yarn
+yarn add @nexora/sdk
+
+# Using pnpm
+pnpm add @nexora/sdk</pre>
+                        </div>
+
+                        <h3>2. Initialize the SDK</h3>
+                        <p>Create a new instance of Nexora in your application:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">JAVASCRIPT</span>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <pre>import Nexora from '@nexora/sdk';
+
+const nexora = new Nexora({
+  apiKey: process.env.NEXORA_API_KEY,
+  environment: 'production',
+  options: {
+    autoSync: true,
+    syncInterval: 3600000, // 1 hour
+    enableAnalytics: true
+  }
+});
+
+// Verify connection
+await nexora.connect();</pre>
+                        </div>
+
+                        <div class="note-box">
+                            <h4>🔑 API Key Security</h4>
+                            <p>Never commit your API keys to version control. Use environment variables or a secure key management system to store your credentials.</p>
+                        </div>
+
+                        <h3>3. Track Your First Event</h3>
+                        <p>Start tracking events to build your identity profile:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">JAVASCRIPT</span>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <pre>// Track a custom event
+await nexora.analytics.track('user_action', {
+  userId: 'user_12345',
+  action: 'completed_project',
+  metadata: {
+    projectType: 'web_development',
+    duration: 720, // hours
+    technologies: ['React', 'Node.js', 'PostgreSQL']
+  }
+});
+
+// Update reputation score
+await nexora.reputation.update({
+  category: 'professional_footprint',
+  value: 50,
+  source: 'github',
+  verified: true
+});</pre>
+                        </div>
+
+                        <h2>Core Concepts</h2>
+
+                        <h3>Identity Aggregation</h3>
+                        <p>Nexora connects to multiple platforms to create a unified view of your professional identity. Each integration contributes to your overall reputation score and provides valuable insights into your digital presence.</p>
+
+                        <h3>Reputation Scoring</h3>
+                        <p>Our proprietary algorithm analyzes your activity across platforms to generate a comprehensive reputation score. Factors include:</p>
+                        <ul>
+                            <li>Professional footprint and consistency</li>
+                            <li>Technical contributions and expertise</li>
+                            <li>Community engagement and collaboration</li>
+                            <li>Content quality and influence</li>
+                            <li>Network strength and connections</li>
+                        </ul>
+
+                        <h3>Analytics Dashboard</h3>
+                        <p>Access real-time analytics through the dashboard or API. Track trends, identify opportunities, and optimize your professional presence with data-driven insights.</p>
+
+                        <h2>Authentication</h2>
+                        <p>Nexora uses API keys for authentication. Generate your API key from the dashboard:</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-language">BASH</span>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <pre># Set your API key as an environment variable
+export NEXORA_API_KEY=nxr_live_1234567890abcdefghijklmnop
+
+# Or use a .env file
+echo "NEXORA_API_KEY=nxr_live_1234567890abcdefghijklmnop" >> .env</pre>
+                        </div>
+
+                        <h2>Next Steps</h2>
+                        <p>Now that you have the basics down, explore our advanced features:</p>
+                        <ul>
+                            <li>Set up custom webhooks for real-time notifications</li>
+                            <li>Configure platform integrations (GitHub, LinkedIn, Twitter, etc.)</li>
+                            <li>Build custom analytics dashboards</li>
+                            <li>Implement team collaboration features</li>
+                            <li>Explore our comprehensive API reference</li>
+                        </ul>
+
+                        <div class="note-box">
+                            <h4>💬 Need Help?</h4>
+                            <p>Join our community Discord server or reach out to our support team at support@nexora.com. We're here to help you succeed!</p>
+                        </div>
+                    </div>
+
+                    <aside class="docs-sidebar-right">
+                        <h4 class="docs-toc-title">On This Page</h4>
+                        <ul class="toc-list">
+                            <li class="toc-item">
+                                <a href="#" class="toc-link">Introduction</a>
+                            </li>
+                            <li class="toc-item">
+                                <a href="#" class="toc-link">Quick Start</a>
+                            </li>
+                            <li class="toc-item">
+                                <a href="#" class="toc-link">Core Concepts</a>
+                            </li>
+                            <li class="toc-item">
+                                <a href="#" class="toc-link">Authentication</a>
+                            </li>
+                            <li class="toc-item">
+                                <a href="#" class="toc-link">Next Steps</a>
+                            </li>
+                        </ul>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- ABOUT PAGE -->
+            <section class="page-section" id="about">
+                <div class="about-hero">
+                    <h1>About Nexora</h1>
+                    <p>We're on a mission to empower professionals worldwide with tools that unify their digital identity, enhance collaboration, and unlock new opportunities through comprehensive reputation analytics.</p>
+                </div>
+
+                <div class="stats-showcase">
+                    <div class="showcase-stat">
+                        <div class="showcase-value">500K+</div>
+                        <div class="showcase-label">Active Users</div>
+                    </div>
+                    <div class="showcase-stat">
+                        <div class="showcase-value">150+</div>
+                        <div class="showcase-label">Integrations</div>
+                    </div>
+                    <div class="showcase-stat">
+                        <div class="showcase-value">99.9%</div>
+                        <div class="showcase-label">Uptime</div>
+                    </div>
+                    <div class="showcase-stat">
+                        <div class="showcase-value">100+</div>
+                        <div class="showcase-label">Countries</div>
+                    </div>
+                </div>
+
+                <div class="section-header-centered">
+                    <h2>Our Values</h2>
+                    <p>The principles that guide everything we do</p>
+                </div>
+
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h3>Mission-Driven</h3>
+                        <p>We believe in transparency, user empowerment, and building technology that serves people first. Every feature we ship is designed to help professionals take control of their digital identity.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">💎</div>
+                        <h3>Quality First</h3>
+                        <p>We're committed to excellence in every aspect of our platform—from our clean, intuitive design to our robust security infrastructure and responsive customer support.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">🌟</div>
+                        <h3>Innovation</h3>
+                        <p>We continuously push boundaries to deliver cutting-edge features that anticipate the needs of modern professionals in an ever-evolving digital landscape.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">🤝</div>
+                        <h3>Community</h3>
+                        <p>Our users are at the heart of everything we do. We actively listen, engage, and build features based on real feedback from our vibrant community.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">🔒</div>
+                        <h3>Privacy & Security</h3>
+                        <p>Your data belongs to you. We employ bank-level encryption, rigorous security protocols, and transparent data practices to protect your information.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">🌍</div>
+                        <h3>Global Impact</h3>
+                        <p>We're building a platform that serves professionals everywhere, regardless of location, background, or industry. Diversity makes us stronger.</p>
+                    </div>
+                </div>
+
+                <div class="team-section">
+                    <div class="section-header-centered">
+                        <h2>Meet Our Team</h2>
+                        <p>The talented people building the future of professional identity</p>
+                    </div>
+
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="team-avatar">AJ</div>
+                            <h4>Alex Johnson</h4>
+                            <p class="team-role">CEO & Co-Founder</p>
+                            <p class="team-bio">Former Director of Product at LinkedIn. Passionate about empowering professionals through technology.</p>
+                        </div>
+
+                        <div class="team-member">
+                            <div class="team-avatar">SC</div>
+                            <h4>Sarah Chen</h4>
+                            <p class="team-role">CTO & Co-Founder</p>
+                            <p class="team-bio">Ex-Google engineer with 15 years building scalable systems. Loves solving complex technical challenges.</p>
+                        </div>
+
+                        <div class="team-member">
+                            <div class="team-avatar">MR</div>
+                            <h4>Marcus Rodriguez</h4>
+                            <p class="team-role">Head of Product</p>
+                            <p class="team-bio">Product visionary from Stripe. Focused on creating delightful user experiences that drive value.</p>
+                        </div>
+
+                        <div class="team-member">
+                            <div class="team-avatar">EP</div>
+                            <h4>Emma Park</h4>
+                            <p class="team-role">Head of Design</p>
+                            <p class="team-bio">Award-winning designer from Airbnb. Believes great design is invisible until it's needed.</p>
+                        </div>
+
+                        <div class="team-member">
+                            <div class="team-avatar">JL</div>
+                            <h4>James Liu</h4>
+                            <p class="team-role">VP of Engineering</p>
+                            <p class="team-bio">Previously at Amazon. Building the infrastructure that powers millions of identity aggregations daily.</p>
+                        </div>
+
+                        <div class="team-member">
+                            <div class="team-avatar">KW</div>
+                            <h4>Kavita Williams</h4>
+                            <p class="team-role">Head of Customer Success</p>
+                            <p class="team-bio">Customer advocate with a passion for helping users achieve their professional goals.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <h2>API Usage</h2>
-                    <p class="card-subtitle">Monitor your API consumption and rate limits.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">📊</div>
-                        <div class="empty-text">
-                            Usage statistics will appear here after generating an API key.
-                        </div>
+                <div class="section-card" style="margin-top: 4rem; text-align: center;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Join Our Team</h2>
+                    <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">We're always looking for talented, passionate people to join our mission. Check out our open positions or reach out to careers@nexora.com</p>
+                    <button class="pricing-btn" style="max-width: 300px; margin: 0 auto;">View Open Positions</button>
+                </div>
+            </section>
+
+            <!-- ANALYTICS PAGE -->
+            <section class="page-section" id="analytics">
+                <div class="analytics-header">
+                    <div class="page-header">
+                        <h1 class="page-title">Analytics Dashboard</h1>
+                        <p class="page-description">Track your growth and engagement across all platforms</p>
+                    </div>
+                    <div class="date-range-selector">
+                        <button class="date-btn">7D</button>
+                        <button class="date-btn">30D</button>
+                        <button class="date-btn active">90D</button>
+                        <button class="date-btn">1Y</button>
+                        <button class="date-btn">All</button>
                     </div>
                 </div>
 
-                <div class="card">
-                    <h2>Webhooks</h2>
-                    <p class="card-subtitle">Configure webhooks to receive real-time updates.</p>
-                    <div class="empty-state">
-                        <div class="empty-icon">🔔</div>
-                        <div class="empty-text">
-                            No webhooks configured. Set up endpoints to receive event notifications.
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Total Impressions</span>
+                            <span class="stat-info">ⓘ</span>
                         </div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-change positive">Start connecting platforms</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Engagement Rate</span>
+                            <span class="stat-info">ⓘ</span>
+                        </div>
+                        <div class="stat-value">0%</div>
+                        <div class="stat-change">Build your presence</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Network Growth</span>
+                            <span class="stat-info">ⓘ</span>
+                        </div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-change">Connect with others</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <span class="stat-label">Content Score</span>
+                            <span class="stat-info">ⓘ</span>
+                        </div>
+                        <div class="stat-value">0</div>
+                        <div class="stat-change">Share your expertise</div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <h2>API Documentation</h2>
-                    <p class="card-subtitle">Complete reference for integrating Nexora into your applications.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">Authentication</span>
-                            <span class="list-meta">View docs</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Endpoints</span>
-                            <span class="list-meta">View docs</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Rate Limits</span>
-                            <span class="list-meta">View docs</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Examples</span>
-                            <span class="list-meta">View docs</span>
-                        </li>
-                    </ul>
+                <div class="chart-container">
+                    <p>📊 Analytics charts will appear here once you start connecting platforms and building your digital identity</p>
+                </div>
+
+                <div class="chart-container">
+                    <p>📈 Platform-by-platform breakdown and comparative analytics coming soon</p>
                 </div>
             </section>
 
-            <!-- SETTINGS -->
-            <section class="section" id="settings">
-                <div class="card">
-                    <h2>Settings</h2>
-                    <p class="card-subtitle">Control your profile, security, and data preferences.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">Profile</span>
-                            <span class="list-meta">Edit</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Security</span>
-                            <span class="list-meta">Manage</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Data & Privacy</span>
-                            <span class="list-meta">Configure</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Notifications</span>
-                            <span class="list-meta">Customize</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Billing</span>
-                            <span class="list-meta">View</span>
-                        </li>
-                    </ul>
+            <!-- OTHER SIDEBAR PAGES (Placeholders) -->
+            <section class="page-section" id="reputation">
+                <div class="page-header">
+                    <h1 class="page-title">Reputation Management</h1>
+                    <p class="page-description">Monitor and enhance your professional reputation across platforms</p>
                 </div>
-
-                <div class="card">
-                    <h2>Account Details</h2>
-                    <p class="card-subtitle">Manage your account information and preferences.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">Email</span>
-                            <span class="list-meta" id="settingsEmail">Loading...</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Account Created</span>
-                            <span class="list-meta">Recently</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Subscription</span>
-                            <span class="list-meta">Free Tier</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Storage Used</span>
-                            <span class="list-meta">0 MB</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h2>Privacy Controls</h2>
-                    <p class="card-subtitle">Manage who can see your information and activity.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">Profile Visibility</span>
-                            <span class="list-meta">Public</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Activity Visibility</span>
-                            <span class="list-meta">Connections Only</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Search Visibility</span>
-                            <span class="list-meta">Enabled</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Data Sharing</span>
-                            <span class="list-meta">Limited</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h2>Notification Preferences</h2>
-                    <p class="card-subtitle">Choose what updates you want to receive.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">Email Notifications</span>
-                            <span class="list-meta">Weekly Summary</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Activity Alerts</span>
-                            <span class="list-meta">Enabled</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Score Updates</span>
-                            <span class="list-meta">Enabled</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Network Updates</span>
-                            <span class="list-meta">Important Only</span>
-                        </li>
-                    </ul>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Connect your platforms to start building your reputation score</p>
                 </div>
             </section>
 
-            <!-- INFO -->
-            <section class="section" id="info">
-                <div class="card">
-                    <h2>About Nexora</h2>
-                    <p class="card-subtitle">This dashboard is the hub — the main game where your identity and reputation live.</p>
-                    <p style="color:var(--charcoal); line-height:1.7; margin-top:1rem;">
-                        Nexora is your unified identity and reputation layer. Instead of scattered profiles and disconnected
-                        signals, Nexora brings everything into one place — this dashboard. As you connect platforms and
-                        build your footprint, this space becomes a live reflection of your digital presence.
-                    </p>
+            <section class="page-section" id="activity">
+                <div class="page-header">
+                    <h1 class="page-title">Activity Feed</h1>
+                    <p class="page-description">Your unified activity stream across all connected platforms</p>
                 </div>
-
-                <div class="card">
-                    <h2>What is the Nexora Score?</h2>
-                    <p style="color:var(--charcoal); line-height:1.7; margin-top:1rem;">
-                        Your Nexora Score is a dynamic reputation metric that starts at zero for everyone. It grows as you
-                        connect platforms, contribute to communities, and maintain a consistent, trustworthy presence online.
-                    </p>
-
-                    <ul class="list" style="margin-top:1.5rem;">
-                        <li class="list-item">
-                            <span class="list-label">Professional Signals</span>
-                            <span class="list-meta">Work history, roles, endorsements</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Technical Signals</span>
-                            <span class="list-meta">GitHub activity, projects, contributions</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Community Signals</span>
-                            <span class="list-meta">Discord, Reddit, forums, groups</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Reliability Signals</span>
-                            <span class="list-meta">Consistency, follow-through, long-term behavior</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Expertise Signals</span>
-                            <span class="list-meta">Depth of knowledge, specialization</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Leadership Signals</span>
-                            <span class="list-meta">Initiative, project ownership, team building</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Innovation Signals</span>
-                            <span class="list-meta">Original work, creative solutions</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Impact Signals</span>
-                            <span class="list-meta">Reach, influence, tangible results</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h2>How to Increase Your Score</h2>
-                    <ul class="list" style="margin-top:1rem;">
-                        <li class="list-item">
-                            <span class="list-label">Connect more integrations</span>
-                            <span class="list-meta">GitHub, LinkedIn, Discord</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Stay active</span>
-                            <span class="list-meta">Commits, posts, contributions</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Build your profile</span>
-                            <span class="list-meta">Add details, verify identity</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Engage with communities</span>
-                            <span class="list-meta">Help others, participate consistently</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Create quality content</span>
-                            <span class="list-meta">Articles, tutorials, documentation</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Collaborate on projects</span>
-                            <span class="list-meta">Team contributions, open source</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Mentor others</span>
-                            <span class="list-meta">Share knowledge, guide newcomers</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Maintain consistency</span>
-                            <span class="list-meta">Regular activity, long-term presence</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h2>Using This Dashboard</h2>
-                    <p style="color:var(--charcoal); line-height:1.7; margin-top:1rem;">
-                        This dashboard is designed to be your control center. Overview gives you a quick snapshot. Reputation
-                        breaks down how your score is built. Activity shows your footprint as it grows. Integrations connect
-                        your platforms. Analytics provides deep insights. Network maps your connections. Achievements tracks
-                        milestones. Skills showcases expertise. Projects displays your work. API & Access lets you bring
-                        Nexora into your own products. Settings gives you control. Info keeps you oriented.
-                    </p>
-                    <p style="color:var(--charcoal); line-height:1.7; margin-top:1rem;">
-                        As Nexora evolves, this hub will gain more analytics, deeper breakdowns, and richer tools — but the
-                        principle stays the same: one place where your digital identity actually makes sense.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h2>Platform Philosophy</h2>
-                    <p style="color:var(--charcoal); line-height:1.7; margin-top:1rem;">
-                        Nexora believes in building a comprehensive, unified view of your digital identity. Rather than
-                        maintaining separate profiles across dozens of platforms, you should have a single source of truth
-                        that aggregates, validates, and showcases your entire professional and creative journey.
-                    </p>
-                    <p style="color:var(--charcoal); line-height:1.7; margin-top:1rem;">
-                        This approach benefits everyone: individuals gain a holistic view of their impact, employers and
-                        collaborators can make better-informed decisions, and communities can recognize and reward genuine
-                        contributions. Your Nexora Score represents real work, real expertise, and real relationships built
-                        over time.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h2>Privacy & Data Ownership</h2>
-                    <p style="color:var(--charcoal); line-height:1.7; margin-top:1rem;">
-                        You own your data. Period. Nexora aggregates and analyzes information from platforms you explicitly
-                        connect, but you maintain full control over what's shared, how it's displayed, and who can see it.
-                        You can disconnect any platform, export your data, or delete your account at any time.
-                    </p>
-                    <p style="color:var(--charcoal); line-height:1.7; margin-top:1rem;">
-                        We believe in transparent data practices. Every signal that contributes to your score is traceable,
-                        explainable, and under your control. No hidden algorithms, no opaque scoring, no selling your data
-                        to third parties.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h2>Getting Help</h2>
-                    <p class="card-subtitle">Resources and support when you need them.</p>
-                    <ul class="list">
-                        <li class="list-item">
-                            <span class="list-label">Documentation</span>
-                            <span class="list-meta">Visit Docs</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Community Forum</span>
-                            <span class="list-meta">Ask Questions</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Support</span>
-                            <span class="list-meta">Contact Us</span>
-                        </li>
-                        <li class="list-item">
-                            <span class="list-label">Feature Requests</span>
-                            <span class="list-meta">Submit Ideas</span>
-                        </li>
-                    </ul>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Your activity feed will appear here</p>
                 </div>
             </section>
 
+            <section class="page-section" id="integrations">
+                <div class="page-header">
+                    <h1 class="page-title">Platform Integrations</h1>
+                    <p class="page-description">Connect your professional accounts to build your unified identity</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Available integrations: GitHub, LinkedIn, Twitter, Stack Overflow, Medium, and 150+ more</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="insights">
+                <div class="page-header">
+                    <h1 class="page-title">Insights & Recommendations</h1>
+                    <p class="page-description">Personalized insights to improve your professional presence</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">AI-powered insights will appear here</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="network">
+                <div class="page-header">
+                    <h1 class="page-title">Professional Network</h1>
+                    <p class="page-description">Visualize and grow your professional connections</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Your network graph will appear here</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="achievements">
+                <div class="page-header">
+                    <h1 class="page-title">Achievements</h1>
+                    <p class="page-description">Track your milestones and accomplishments</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Earn achievements by reaching milestones</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="skills">
+                <div class="page-header">
+                    <h1 class="page-title">Skills & Expertise</h1>
+                    <p class="page-description">Showcase and validate your professional skills</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Add and endorse skills</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="projects">
+                <div class="page-header">
+                    <h1 class="page-title">Projects Portfolio</h1>
+                    <p class="page-description">Showcase your best work and contributions</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Add projects to showcase your work</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="contributions">
+                <div class="page-header">
+                    <h1 class="page-title">Contributions</h1>
+                    <p class="page-description">Track your open source and community contributions</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Your contribution history will appear here</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="timeline">
+                <div class="page-header">
+                    <h1 class="page-title">Professional Timeline</h1>
+                    <p class="page-description">Your career journey visualized</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Build your professional timeline</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="portfolio">
+                <div class="page-header">
+                    <h1 class="page-title">Visual Portfolio</h1>
+                    <p class="page-description">Share your creative work and case studies</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Create your visual portfolio</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="endorsements">
+                <div class="page-header">
+                    <h1 class="page-title">Endorsements & Testimonials</h1>
+                    <p class="page-description">Collect and display professional recommendations</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Request endorsements from colleagues</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="api">
+                <div class="page-header">
+                    <h1 class="page-title">API & Developer Access</h1>
+                    <p class="page-description">Integrate Nexora into your applications</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Generate API keys and view documentation</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="settings">
+                <div class="page-header">
+                    <h1 class="page-title">Account Settings</h1>
+                    <p class="page-description">Manage your account preferences and privacy</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Configure your account settings</p>
+                </div>
+            </section>
+
+            <section class="page-section" id="info">
+                <div class="page-header">
+                    <h1 class="page-title">Help & Information</h1>
+                    <p class="page-description">Get support and learn more about Nexora</p>
+                </div>
+                <div class="section-card">
+                    <p style="text-align: center; padding: 3rem; color: var(--text-secondary);">Access help resources and contact support</p>
+                </div>
+            </section>
         </main>
     </div>
 
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script>
-        const { createClient } = supabase;
-        const client = createClient(
-            "https://xnulucbilzgxvbdvfqeg.supabase.co",
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhudWx1Y2JpbHpneHZiZHZmcWVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk4ODY1MjgsImV4cCI6MjA4NTQ2MjUyOH0.NbUiUNBUeJBFYoKBnX0tsjz9aRViEoSHdM2WQNy58GU"
-        );
+        // Profile dropdown
+        const profileChip = document.getElementById('profileChip');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const profileEmail = document.getElementById('profileEmail');
+        const avatar = document.getElementById('avatar');
 
-        async function loadUser() {
-            const { data: sessionData } = await client.auth.getSession();
-            if (!sessionData.session) {
-                window.location.href = "signin.html";
-                return;
-            }
+        setTimeout(() => {
+            profileEmail.textContent = 'user@example.com';
+            avatar.textContent = 'U';
+        }, 300);
 
-            const email = sessionData.session.user.email;
-            const avatarEl = document.getElementById("avatar");
-            const profileEmailEl = document.getElementById("profileEmail");
-            const settingsEmailEl = document.getElementById("settingsEmail");
+        profileChip.addEventListener('click', (e) => {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('show');
+        });
 
-            profileEmailEl.textContent = email;
-            avatarEl.textContent = email.charAt(0).toUpperCase();
-            if (settingsEmailEl) {
-                settingsEmailEl.textContent = email;
-            }
-        }
+        document.addEventListener('click', () => {
+            profileDropdown.classList.remove('show');
+        });
 
-        loadUser();
-
-        async function logout() {
-            await client.auth.signOut();
-            window.location.href = "signin.html";
-        }
-
-        // TAB SWITCHING
-        const sidebarItems = document.querySelectorAll(".sidebar-item");
-        const sections = document.querySelectorAll(".section");
-
-        sidebarItems.forEach(item => {
-            item.addEventListener("click", () => {
-                const tab = item.getAttribute("data-tab");
-
-                sidebarItems.forEach(i => i.classList.remove("active"));
-                item.classList.add("active");
-
-                sections.forEach(section => {
-                    section.classList.remove("active");
-                });
-
-                const activeSection = document.getElementById(tab);
-                if (activeSection) {
-                    activeSection.classList.add("active");
-                }
+        document.querySelectorAll('[data-dropdown-action]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const action = e.target.dataset.dropdownAction;
+                alert(`Action: ${action}`);
             });
         });
 
-        // SIDEBAR COLLAPSE
-        const sidebar = document.getElementById("sidebar");
-        const sidebarToggle = document.getElementById("sidebarToggle");
+        // Page navigation - Top navbar
+        const navPages = {
+            overview: document.getElementById('overview'),
+            pricing: document.getElementById('pricing'),
+            blog: document.getElementById('blog'),
+            docs: document.getElementById('docs'),
+            about: document.getElementById('about')
+        };
 
-        sidebarToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("collapsed");
+        function navigateToPage(pageName) {
+            Object.values(document.querySelectorAll('.page-section')).forEach(page => {
+                page.classList.remove('active');
+            });
+
+            if (navPages[pageName]) {
+                navPages[pageName].classList.add('active');
+            } else {
+                // For sidebar pages
+                const sidebarPage = document.getElementById(pageName);
+                if (sidebarPage) {
+                    sidebarPage.classList.add('active');
+                }
+            }
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageName) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.sidebarPage === pageName) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Top navbar navigation
+        document.querySelectorAll('[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = e.target.dataset.page;
+                navigateToPage(page);
+            });
         });
 
-        // PROFILE DROPDOWN
-        const profileChip = document.getElementById("profileChip");
-        const profileDropdown = document.getElementById("profileDropdown");
-
-        profileChip.addEventListener("click", (e) => {
-            e.stopPropagation();
-            profileDropdown.classList.toggle("open");
+        // Sidebar navigation
+        document.querySelectorAll('[data-sidebar-page]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = e.currentTarget.dataset.sidebarPage;
+                navigateToPage(page);
+            });
         });
 
-        document.addEventListener("click", () => {
-            profileDropdown.classList.remove("open");
+        // Pricing toggle
+        const toggleOptions = document.querySelectorAll('.toggle-option');
+        toggleOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                toggleOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+            });
         });
 
-        profileDropdown.addEventListener("click", async (e) => {
-            e.stopPropagation();
-            const action = e.target.getAttribute("data-dropdown-action");
-            if (!action) return;
+        // Blog filters
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
 
-            if (action === "logout") {
-                await logout();
-            } else if (action === "settings") {
-                const settingsItem = document.querySelector('.sidebar-item[data-tab="settings"]');
-                if (settingsItem) settingsItem.click();
-            } else if (action === "profile") {
-                const settingsItem = document.querySelector('.sidebar-item[data-tab="settings"]');
-                if (settingsItem) settingsItem.click();
+        // Date range selector
+        const dateBtns = document.querySelectorAll('.date-btn');
+        dateBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                dateBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Copy code blocks
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const codeBlock = btn.closest('.code-block').querySelector('pre');
+                navigator.clipboard.writeText(codeBlock.textContent);
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                }, 2000);
+            });
+        });
+
+        // Logout button
+        document.querySelector('.logout-btn').addEventListener('click', () => {
+            alert('Logging out...');
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            if (searchTerm.length > 2) {
+                console.log('Searching for:', searchTerm);
             }
         });
-
-        // ONBOARDING PROGRESS (starts at 0)
-        const onboardingProgress = document.getElementById("onboardingProgress");
-        const onboardingLabel = document.getElementById("onboardingLabel");
-        const onboardingPercent = 0;
-        onboardingProgress.style.width = onboardingPercent + "%";
-        onboardingLabel.textContent = onboardingPercent + "% of your onboarding is complete.";
     </script>
 </body>
 </html>
