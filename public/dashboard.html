@@ -758,7 +758,7 @@ label{font-size:0.85rem;font-weight:600;color:var(--text2)}
     </div>
   </div>
 
-  <div class="alert alert-warning"><span class="alert-icon">⚡</span><div class="alert-body"><strong>Get Started Fast</strong>Add your OpenAI API key in AI Assistant to unlock all AI features. It's free to try!</div></div>
+  <div class="alert alert-success"><span class="alert-icon">🤖</span><div class="alert-body"><strong>AI is ready to use!</strong> Click AI Assistant in the sidebar to chat, generate code, build resumes, and more — completely free.</div></div>
 
   <div class="grid-4 mb-2">
     <div class="mini-card" onclick="navigate('integrations')">
@@ -848,24 +848,11 @@ label{font-size:0.85rem;font-weight:600;color:var(--text2)}
 <section class="page" id="page-ai-chat">
   <div class="card-header" style="margin-bottom:1rem">
     <div class="card-title">🤖 AI Assistant</div>
-    <div class="card-sub">Powered by OpenAI. Add your API key below to chat with GPT-4o.</div>
+    <div class="card-sub">Powered by OpenAI GPT-4o · Free for all Nexora users ✨</div>
   </div>
-
-  <div class="card" style="margin-bottom:1rem">
-    <div class="flex-between mb-1">
-      <label>🔑 OpenAI API Key</label>
-      <span class="badge badge-green" id="key-status">Not connected</span>
-    </div>
-    <div class="ai-key-setup">
-      <input class="ai-key-input" type="password" id="openai-key" placeholder="sk-proj-... (paste your key here, stays local)">
-      <select class="ai-model-select" id="ai-model">
-        <option value="gpt-4o-mini">GPT-4o mini (Fast)</option>
-        <option value="gpt-4o">GPT-4o (Best)</option>
-        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
-      </select>
-      <button class="btn btn-primary btn-sm" onclick="saveKey()">Save</button>
-    </div>
-    <p style="font-size:0.75rem;color:var(--text3);margin-top:0.5rem">🔒 Your key is stored only in your browser's local memory. Never sent anywhere except OpenAI directly.</p>
+  <div class="alert alert-success" style="margin-bottom:1rem">
+    <span class="alert-icon">✅</span>
+    <div class="alert-body"><strong>AI is ready!</strong> No setup needed — just start chatting below.</div>
   </div>
 
   <div class="ai-wrap">
@@ -885,7 +872,7 @@ label{font-size:0.85rem;font-weight:600;color:var(--text2)}
         <div class="msg-avatar">N</div>
         <div>
           <div class="msg-bubble">Hey Aniketh! 👋 I'm your Nexora AI assistant, powered by OpenAI. I can help you with:<br><br>
-          • Writing and debugging code<br>• Career advice &amp; roadmaps<br>• Explaining any concept<br>• Reviewing your projects<br>• Finding resources<br>• Answering literally anything dev-related<br><br>Add your OpenAI API key above and let's get started!</div>
+          • Writing and debugging code<br>• Career advice &amp; roadmaps<br>• Explaining any concept<br>• Reviewing your projects<br>• Finding resources<br>• Answering literally anything dev-related<br><br>Just type your question below and hit Enter — I'm ready! 🚀</div>
           <div class="msg-time">Just now</div>
         </div>
       </div>
@@ -1037,7 +1024,7 @@ label{font-size:0.85rem;font-weight:600;color:var(--text2)}
 <section class="page" id="page-notifications">
   <div class="card-header mb-2"><div class="card-title">🔔 Notifications</div><div class="card-sub">5 unread</div></div>
   <div class="card">
-    <div class="notification-item unread"><span class="notif-icon">🤖</span><div class="notif-body"><div class="notif-title">AI Assistant is ready!</div><div class="notif-text">Add your OpenAI API key to unlock all AI features.</div></div><span class="notif-time">Now</span></div>
+    <div class="notification-item unread"><span class="notif-icon">🤖</span><div class="notif-body"><div class="notif-title">AI Assistant is ready!</div><div class="notif-text">No setup needed — AI is pre-configured and free for all users!</div></div><span class="notif-time">Now</span></div>
     <div class="notification-item unread"><span class="notif-icon">🏆</span><div class="notif-body"><div class="notif-title">Achievement Unlocked: First Login!</div><div class="notif-text">You've taken the first step. +50 XP</div></div><span class="notif-time">1m ago</span></div>
     <div class="notification-item unread"><span class="notif-icon">⚔️</span><div class="notif-body"><div class="notif-title">3 Daily Challenges available</div><div class="notif-text">Complete them for bonus XP and streaks.</div></div><span class="notif-time">5m ago</span></div>
     <div class="notification-item unread"><span class="notif-icon">🎯</span><div class="notif-body"><div class="notif-title">Set your first goal</div><div class="notif-text">Goals help you stay focused and track progress.</div></div><span class="notif-time">10m ago</span></div>
@@ -1352,13 +1339,11 @@ label{font-size:0.85rem;font-weight:600;color:var(--text2)}
     <div class="settings-row"><div class="sr-info"><strong>Streak Warnings</strong><span>Alert before streak breaks</span></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
   </div>
   <div class="card">
-    <div class="card-title" style="font-size:1rem;margin-bottom:1rem">🔑 OpenAI API Key</div>
-    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:1rem">Required to use all AI features. Your key is stored locally and sent directly to OpenAI.</p>
-    <div class="flex-gap">
-      <input type="password" id="settings-key" placeholder="sk-proj-..." style="margin-top:0;flex:1">
-      <button class="btn btn-primary" onclick="saveKeyFromSettings()">Save Key</button>
+    <div class="card-title" style="font-size:1rem;margin-bottom:1rem">🤖 AI Status</div>
+    <div class="alert alert-success" style="margin-bottom:0">
+      <span class="alert-icon">✅</span>
+      <div class="alert-body"><strong>AI is pre-configured!</strong> All AI features are ready to use with no setup needed.</div>
     </div>
-    <p style="font-size:0.75rem;color:var(--text3);margin-top:0.5rem">🔒 Never shared. Stored in browser memory only.</p>
   </div>
 </section>
 
@@ -1366,7 +1351,7 @@ label{font-size:0.85rem;font-weight:600;color:var(--text2)}
 <section class="page" id="page-help">
   <div class="card-header mb-2"><div class="card-title">❓ Help & FAQ</div><div class="card-sub">Answers to everything you need</div></div>
   <div class="card">
-    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How do I add my OpenAI API key?</span><span class="faq-chevron">▼</span></div><div class="faq-a"><div class="faq-a-content">Go to AI Assistant or Settings and paste your key starting with <code>sk-</code> into the API key field. Click Save. Your key stays in your browser only — it's never sent to Nexora servers. To get a key, sign up at platform.openai.com.</div></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do I need an API key to use AI features?</span><span class="faq-chevron">▼</span></div><div class="faq-a"><div class="faq-a-content">Nope! Nexora's AI is pre-configured and ready to use for everyone. Just open the AI Assistant, Code Generator, Resume Builder, or AI Roadmap and start immediately — no account or setup needed.</div></div></div>
 
     <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What can the AI Assistant do?</span><span class="faq-chevron">▼</span></div><div class="faq-a"><div class="faq-a-content">The AI (powered by OpenAI GPT) can explain any coding concept, review your project ideas, generate code, help debug errors, give career advice, create learning roadmaps, and answer literally any tech question. It's like having a senior dev mentor available 24/7.</div></div></div>
 
@@ -1472,7 +1457,7 @@ label{font-size:0.85rem;font-weight:600;color:var(--text2)}
 <script>
 // ── STATE ──
 let currentPage = 'overview';
-let openaiKey = '';
+let openaiKey = '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';
 let chatHistory = [];
 let pomodoroInterval = null;
 let pomodoroSeconds = 25 * 60;
@@ -1542,27 +1527,14 @@ function handleSearch(q) {
 }
 
 // ── AI KEY ──
-function saveKey() {
-  const k = document.getElementById('openai-key').value.trim();
-  if (!k.startsWith('sk-')) { showToast('❌ Invalid key. Must start with sk-'); return; }
-  openaiKey = k;
-  document.getElementById('key-status').textContent = '✅ Connected';
-  document.getElementById('key-status').className = 'badge badge-green';
-  showToast('✅ API key saved! Start chatting.');
-}
-function saveKeyFromSettings() {
-  const k = document.getElementById('settings-key').value.trim();
-  if (!k.startsWith('sk-')) { showToast('❌ Invalid key'); return; }
-  openaiKey = k;
-  showToast('✅ API key saved!');
-}
+
 
 // ── AI CHAT ──
 async function sendChat() {
   const input = document.getElementById('ai-input');
   const msg = input.value.trim();
   if (!msg) return;
-  if (!openaiKey) { showToast('🔑 Add your OpenAI API key first!'); navigate('ai-chat'); return; }
+  
   input.value = '';
   appendMessage('user', msg);
   chatHistory.push({role:'user', content: msg});
@@ -1574,7 +1546,7 @@ async function sendChat() {
       method: 'POST',
       headers: {'Content-Type':'application/json','Authorization':'Bearer ' + openaiKey},
       body: JSON.stringify({
-        model: document.getElementById('ai-model').value,
+        model: 'gpt-4o-mini',
         messages: [
           {role:'system', content:'You are Nexora AI, a helpful developer mentor for Aniketh, a 15-year-old developer from Los Angeles building his first big project. Be encouraging, practical, and clear. Format code with backticks. Keep answers concise but complete.'},
           ...chatHistory
@@ -1637,7 +1609,7 @@ function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replac
 
 // ── CODE GENERATOR ──
 async function generateCode() {
-  if (!openaiKey) { showToast('🔑 Add API key first in AI Assistant!'); navigate('ai-chat'); return; }
+  
   const lang = document.getElementById('code-lang').value;
   const desc = document.getElementById('code-desc').value.trim();
   const complexity = document.getElementById('code-complexity').value;
@@ -1674,7 +1646,7 @@ function copyCode() {
 
 // ── RESUME BUILDER ──
 async function buildResume() {
-  if (!openaiKey) { showToast('🔑 Add API key first!'); navigate('ai-chat'); return; }
+  
   const name = document.getElementById('r-name').value || 'Aniketh Natarajan';
   const role = document.getElementById('r-role').value || 'Software Developer';
   const skills = document.getElementById('r-skills').value;
@@ -1712,7 +1684,7 @@ function copyResume() {
 
 // ── ROADMAP GENERATOR ──
 async function generateRoadmap() {
-  if (!openaiKey) { showToast('🔑 Add API key first!'); navigate('ai-chat'); return; }
+  
   const goal = document.getElementById('rm-goal').value;
   const level = document.getElementById('rm-level').value;
   const time = document.getElementById('rm-time').value;
